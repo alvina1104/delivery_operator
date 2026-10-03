@@ -7,7 +7,7 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from mysite.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME
 from mysite.database.db import SessionLocal
-from mysite.database.models import User, RefreshToken
+from mysite.database.models import UserProfile, RefreshToken
 from mysite.schemas.auth_schema import UserRegisterSchema, UserLoginSchema, UserOutSchema, CurrentUserSchema
 
 credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,

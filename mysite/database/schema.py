@@ -1,16 +1,15 @@
-from datetime import datetime
+from datetime import date
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 from mysite.database.models import Status
 
 
-class UserInputSchema(BaseModel):
-    first_name: str
-    last_name: str
+class UserRegisterSchema(BaseModel):
     username: str
     email: EmailStr
+    phone_number: str
     password: str
 
 
@@ -18,12 +17,11 @@ class UserOutSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
-    first_name: str
-    last_name: str
     username: str
     email: EmailStr
+    phone_number: str
     status: Status
-    registered_date: datetime
+    registered_date: date
 
 
 class UserLoginSchema(BaseModel):
@@ -32,11 +30,10 @@ class UserLoginSchema(BaseModel):
 
 
 class UserUpdateSchema(BaseModel):
-    first_name: Optional[str]
-    last_name: Optional[str]
-    username: Optional[str]
-    email: Optional[EmailStr]
-    password: Optional[str]
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+    phone_number: Optional[str] = None
+    password: Optional[str] = None
 
 
 class CurrentUserSchema(BaseModel):
@@ -57,8 +54,8 @@ class AgentResponse(BaseModel):
 
 class FileObjectCreateSchema(BaseModel):
     dataset_file: str
-    task_file: Optional[str]
-    img_file: Optional[str]
+    task_file: Optional[str] = None
+    img_file: Optional[str] = None
 
 
 class FileObjectOutSchema(BaseModel):
@@ -66,6 +63,6 @@ class FileObjectOutSchema(BaseModel):
 
     id: int
     dataset_file: str
-    task_file: Optional[str]
-    img_file: Optional[str]
+    task_file: Optional[str] = None
+    img_file: Optional[str] = None
     user_id: int
